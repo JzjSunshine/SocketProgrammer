@@ -1,3 +1,5 @@
+// ctrl + k + c
+//  Ctrl + K+ U 
 #define WIN32_LEAN_AND_MEAN
 
 #include <iostream>
@@ -10,6 +12,69 @@ using namespace std;
 //输出目录 $(SolutionDir)..bin/$(Platform)/$(Configuration)\
 //中间目录 $(SolutionDir)../temp/$(Platform)/$(Configuration)/$(ProjectName)\
 
+enum CMD {
+	CMD_LOGIN,
+	CMD_LOGIN_RESULT,
+	CMD_LOGOUT,
+	CMD_LOGOUT_RESULT,
+	LOG_ERROR
+};
+//消息头
+struct  DataHeader {
+	short dataLength;//数据长度
+	short cmd;//
+};
+//DataPackage
+struct Login :public DataHeader
+{
+	Login()
+	{
+		dataLength = sizeof(Login);
+		cmd = CMD_LOGIN;
+	}
+	/*Login(char *name, char *pwd)
+	{
+		strcpy(userName, name);
+		strcpy(PassWord, pwd);
+	}*/
+	char userName[32];
+	char PassWord[32];
+};
+
+struct LoginResult :public DataHeader
+{
+	LoginResult()
+	{
+		dataLength = sizeof(LoginResult);
+		cmd = CMD_LOGIN_RESULT;
+		result = 0;
+	}
+	int result;
+};
+
+struct LogOut :public DataHeader
+{
+	LogOut()
+	{
+		dataLength = sizeof(LogOut);
+		cmd = CMD_LOGOUT;
+	}
+	/*LogOut(char *name)
+	{
+		strcpy(userName, name);
+	}*/
+	char userName[32];
+};
+struct LogOutResult :public DataHeader
+{
+	LogOutResult()
+	{
+		dataLength = sizeof(LogOutResult);
+		cmd = CMD_LOGIN_RESULT;
+		result = 0;
+	}
+	int result;
+};
 int main()
 {
 	//启动windows socket 2.x环境
@@ -62,33 +127,52 @@ int main()
 	{
 		cout << "接收数据客户端有效..." << endl;
 	}
-	cout << "新客户端加入:socket = " << _cSock << ", IP = " << inet_ntoa(clientAddr.sin_addr) /*转换为 字符串 刻度的字符串数字*/ << endl;
-	char _recvBuf[128] = {};//接收缓存区
+	cout << "新客户端加入: socket = " << _cSock << ", IP = " << inet_ntoa(clientAddr.sin_addr) /*转换为 字符串 刻度的字符串数字*/ << endl;
+	
 	while (true)
 	{
+		DataHeader header = {};
 		//5.接收客户端的请求数据
-		int nLen = recv(_cSock, _recvBuf, 128, 0);
+		int nLen = recv(_cSock,(char*)&header, sizeof(DataHeader), 0);
 		if (nLen <= 0)
 		{
 			cout << "客户端已退出，任务结束" << endl;
 			break;
 		}
-		cout << "收到命令：" << _recvBuf << endl;
-		//6.处理请求
-		if (strcmp(_recvBuf, "getName") == 0) {
-			char msgBuf[] = "Xiao Qiang!";
-			//7.向客户端发送一条数据send
-			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);//strlen(msgBuf) + 1 将结尾符一并发送过去
-		}
-		else if (strcmp(_recvBuf, "getAge") == 0) {
-			char msgBuf[] = "18";
-			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);//strlen(msgBuf) + 1 将结尾符一并发送过去
-		}
-		else {
-			char msgBuf[] = "hello ,I'm server!";
-			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);//strlen(msgBuf) + 1 将结尾符一并发送过去
-		}
 		
+		//6.处理请求
+		switch (header.cmd) {
+			case CMD_LOGIN: 
+			{
+				Login login = {};
+				//做数据的偏移
+				recv(_cSock, (char*)&login + sizeof(DataHeader), sizeof(Login) - sizeof(DataHeader), 0);
+				cout << "收到命令：数据命令：" << login.cmd << "，数据长度：" << login.dataLength << "，userName = " 
+					<< login.userName << ",PassWord = " << login.PassWord << endl;
+				LoginResult ret;
+				//忽略判断用户名和密码是否正确
+				send(_cSock, (char*)&ret, sizeof(LoginResult), 0);
+			}
+			break;
+			case CMD_LOGOUT: 
+			{
+				LogOut logOut = {};
+				recv(_cSock, (char*)&logOut + sizeof(DataHeader), sizeof(LogOut) - sizeof(DataHeader), 0);
+				cout << "收到命令：数据命令：" << logOut.cmd << "，数据长度：" << logOut.dataLength << "，userName = "
+					<< logOut.userName << endl;
+				LogOutResult ret;
+				//忽略判断用户名和密码是否正确
+				send(_cSock, (char*)&ret, sizeof(LogOutResult), 0);
+			}
+			 break;
+			default:
+			{
+				header.cmd = LOG_ERROR;
+				header.dataLength = 0;
+				send(_cSock, (char *)&header, sizeof(header), 0);//strlen(msgBuf) + 1 将结尾符一并发送过去
+				break;
+			}
+		}	
 	}
 	//8.关闭socket closesocket
 	closesocket(_sock);

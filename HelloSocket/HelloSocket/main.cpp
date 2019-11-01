@@ -10,13 +10,14 @@ using namespace std;
 //输出目录 $(SolutionDir)..bin/$(Platform)/$(Configuration)\
 //中间目录 $(SolutionDir)../temp/$(Platform)/$(Configuration)/$(ProjectName)\
 
+
 int main()
 {
 	//启动windows socket 2.x环境
 	WORD ver = MAKEWORD(2, 2);
 	WSADATA dat;
 	WSAStartup(ver, &dat);
-	//-----------------------------
+	//----------------------------
 	//TCP客户端
 	//1.建立一个socket
 	//2.连接服务器connect

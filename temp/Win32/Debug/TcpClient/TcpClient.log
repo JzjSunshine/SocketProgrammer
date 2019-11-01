@@ -1,7 +1,13 @@
 ﻿  client.cpp
-d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(34): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(99): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
   c:\program files (x86)\windows kits\8.1\include\um\winsock2.h(1850): note: 参见“inet_addr”的声明
-d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(48): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(113): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   e:\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 参见“scanf”的声明
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(122): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  e:\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 参见“strcpy”的声明
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(123): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  e:\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 参见“strcpy”的声明
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpclient\client.cpp(133): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  e:\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 参见“strcpy”的声明
   TcpClient.vcxproj -> D:\HomeWork\Year3\Year31\Socket\HelloSocket\HelloSocket\..bin/Win32/Debug\TcpClient.exe
   TcpClient.vcxproj -> D:\HomeWork\Year3\Year31\Socket\HelloSocket\HelloSocket\..bin/Win32/Debug\TcpClient.pdb (Full PDB)

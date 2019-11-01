@@ -1,7 +1,7 @@
 ﻿  server.cpp
-d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpserver\server.cpp(33): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpserver\server.cpp(98): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
   c:\program files (x86)\windows kits\8.1\include\um\winsock2.h(1850): note: 参见“inet_addr”的声明
-d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpserver\server.cpp(65): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+d:\homework\year3\year31\socket\hellosocket\hellosocket\tcpserver\server.cpp(130): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
   c:\program files (x86)\windows kits\8.1\include\um\winsock2.h(1868): note: 参见“inet_ntoa”的声明
   TcpServer.vcxproj -> D:\HomeWork\Year3\Year31\Socket\HelloSocket\HelloSocket\..bin/Win32/Debug\TcpServer.exe
   TcpServer.vcxproj -> D:\HomeWork\Year3\Year31\Socket\HelloSocket\HelloSocket\..bin/Win32/Debug\TcpServer.pdb (Full PDB)
